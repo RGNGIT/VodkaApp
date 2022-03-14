@@ -12,7 +12,8 @@ namespace VodkaApp
             chart1.Series.Clear();
             chart1.Series.Add(new Series("Фиксируем прибыль")
             {
-                ChartType = SeriesChartType.Spline
+                ChartType = SeriesChartType.Spline,
+                BorderWidth = 3
             });
         }
 
