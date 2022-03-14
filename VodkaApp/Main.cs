@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace VodkaApp
 {
@@ -8,14 +9,27 @@ namespace VodkaApp
         public Main()
         {
             InitializeComponent();
+            chart1.Series.Clear();
+            chart1.Series.Add(new Series("Фиксируем прибыль")
+            {
+                ChartType = SeriesChartType.Spline
+            });
         }
 
-        int bottleAmount { get; set; } = 100;
+        int bottleAmount { get; set; } = STARTER;
+        int sold = 0;
+        float income = 0;
         float hours { get; set; } = 0.0f;
         float timeUntilVodka { get; set; } = -1;
 
+        const float VODKA_PRICE = 150f;
+        const float PENALTY = 40f;
+        const int STARTER = 100;
+
         static int RndGen() => new Random().Next(1, 4);
         void Logger(string message) => listBoxLog.Items.Add($"[Час {hours.ToString("0.0")}] {message}");
+        float ProfFormula() => (VODKA_PRICE * sold) - (PENALTY * (STARTER - sold));
+        float DifFormula() => (VODKA_PRICE * STARTER) - (PENALTY * (sold - STARTER));
 
         bool check = false;
 
@@ -34,7 +48,7 @@ namespace VodkaApp
                 {
                     timeUntilVodka = hours + 5f;
                     check = true;
-                } else if(hours >= timeUntilVodka)
+                } else if (hours >= timeUntilVodka)
                 {
                     bottleAmount += 100;
                     check = false;
@@ -45,12 +59,15 @@ namespace VodkaApp
 
         void IncomeLogic()
         {
-
+            income += bottleAmount > 0 ? ProfFormula() : -DifFormula();
+            chart1.Series["Фиксируем прибыль"].Points.AddXY(hours, income);
+            labelInfo.Text = $"Доход: {income}p";
         }
 
         void ShopIter(int amount)
         {
             Logger($"Покупатель взял {amount} бутылок водки.");
+            sold += amount;
             bottleAmount -= amount;
         }
 
