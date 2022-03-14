@@ -60,7 +60,7 @@ namespace VodkaApp
         void IncomeLogic()
         {
             income += bottleAmount > 0 ? ProfFormula() : -DifFormula();
-            chart1.Series["Фиксируем прибыль"].Points.AddXY(hours, income);
+            chart1.Series["Фиксируем прибыль"].Points.AddXY(hours.ToString("0.0"), income);
             labelInfo.Text = $"Доход: {income}p";
         }
 
