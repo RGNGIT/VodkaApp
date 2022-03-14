@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1800
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VodkaApp", "WindowsFormsApp1\VodkaApp.csproj", "{791BDC44-8740-4EC5-A5F8-F845C34A97BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VodkaApp", "VodkaApp\VodkaApp.csproj", "{791BDC44-8740-4EC5-A5F8-F845C34A97BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
